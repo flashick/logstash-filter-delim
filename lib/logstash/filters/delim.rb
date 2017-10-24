@@ -29,18 +29,18 @@ class LogStash::Filters::Delim < LogStash::Filters::Base
   def filter(event)
 
     if @source
-      @str = event.get(@source)
+      str = event.get(@source)
       if @delimiter
-        @split_str = @str.split(@delimiter, @fields.length)
+        split_str = str.split(@delimiter, @fields.length)
 
         if @target && @fields
-          @result = {}
+          result = {}
           @split_str.each_with_index do |f, i|
-            @result[fields[i]] = f
+            result[@fields[i]] = f
           end
           event.set(@target, @result)
         else
-          @split_str.each_with_index do |f, i|
+          split_str.each_with_index do |f, i|
             event.set(@fields[i], f)
           end
         end
