@@ -35,7 +35,7 @@ class LogStash::Filters::Delim < LogStash::Filters::Base
 
         if @target && @fields
           result = {}
-          @split_str.each_with_index do |f, i|
+          split_str.each_with_index do |f, i|
             result[@fields[i]] = f
           end
           event.set(@target, @result)
